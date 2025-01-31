@@ -4,12 +4,12 @@ interface Book {
   author: string;
   genre: string;
   rating: number;
-  total_copies: number;
-  available_copies: number;
+  totalCopies: number;
+  availableCopies: number;
   description: string;
   coverColor: string;
   coverUrl: string;
-  video: string;
+  videoUrl: string;
   summary: string;
   isLoanedBook?: boolean;
 }
