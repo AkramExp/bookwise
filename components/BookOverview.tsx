@@ -11,7 +11,7 @@ const BookOverview = ({
   total_copies,
   available_copies,
   description,
-  color,
+  coverColor,
   coverUrl,
 }: Book) => {
   console.log(title);
@@ -59,12 +59,16 @@ const BookOverview = ({
           <BookCover
             variant="wide"
             className="z-10"
-            coverColor={color}
+            coverColor={coverColor}
             coverUrl={coverUrl}
           />
 
           <div className="absolute left-16 top-10 rotate-12 opacity-40">
-            <BookCover variant="wide" coverColor={color} coverUrl={coverUrl} />
+            <BookCover
+              variant="wide"
+              coverColor={coverColor}
+              coverUrl={coverUrl}
+            />
           </div>
         </div>
       </div>
