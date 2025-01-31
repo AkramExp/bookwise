@@ -34,7 +34,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={`${ibmPlexSans.className} ${bebasNeue.variable}`}>
+        {children}
+      </body>
     </html>
   );
 }
