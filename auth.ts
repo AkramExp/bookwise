@@ -1,14 +1,17 @@
-import NextAuth, { User } from "next-auth";
+import NextAuth, { AuthOptions, getServerSession, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { eq } from "drizzle-orm";
 import { compare } from "bcryptjs";
 import { db } from "@/database/drizzle";
 import { users } from "@/database/schema";
 
-const authOptions = {
+export const authOptions: AuthOptions = {
+  session: {
+    strategy: "jwt",
+  },
   providers: [
     CredentialsProvider({
-      name: "Credentials",
+      name: "credentials",
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
@@ -45,7 +48,6 @@ const authOptions = {
     signIn: "/sign-in",
   },
   callbacks: {
-    // @ts-ignore
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
@@ -54,9 +56,10 @@ const authOptions = {
 
       return token;
     },
-    // @ts-ignore
+
     async session({ session, token }) {
       if (session.user) {
+        // @ts-ignore
         session.user.id = token.id as string;
         session.user.name = token.name as string;
       }
@@ -65,5 +68,3 @@ const authOptions = {
     },
   },
 };
-
-export default NextAuth(authOptions);

@@ -1,7 +1,8 @@
+import { Toaster } from "@/components/ui/toaster";
+import Providers from "@/providers/providers";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { Toaster } from "@/components/ui/toaster";
 
 const ibmPlexSans = localFont({
   src: [
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
   description: "Book Review Website",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -36,8 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${ibmPlexSans.className} ${bebasNeue.variable}`}>
-        {children}
-
+        <Providers>{children}</Providers>
         <Toaster />
       </body>
     </html>
